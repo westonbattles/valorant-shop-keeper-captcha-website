@@ -45,6 +45,8 @@
         <script src="https://js.hcaptcha.com/1/api.js" async defer></script>
         <script>
             window.onload = async () => {
+                const params = new URLSearchParams(window.location.search);
+                const siteKey = params.get('sitekey');
                 const response = await fetch("/v1/hcaptcha/rqdata");
                 const data = await response.text();
                 hcaptcha.setData("", { rqdata: data });
@@ -76,7 +78,7 @@
         <form action="/" method="POST" id="hcaptcha-form">
             <div
                 class="h-captcha"
-                data-sitekey="SITE_KEY"
+                [data-sitekey]="siteKey"
                 data-theme="dark"
             ></div>
             <button type="submit">Continue</button>
